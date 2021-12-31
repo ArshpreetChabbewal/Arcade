@@ -1,11 +1,7 @@
 import React from "react";
 
-const Cell = ({ id, turn, setTurn }) => {
-  const handleClick = (id) => {
-    alert(`${id}`);
-    setTurn(turn === "X" ? "O" : "X");
-  };
-  return <td onClick={() => handleClick(id)}>-</td>;
+const Cell = ({ id, handleClick, cells }) => {
+  return <td onClick={() => handleClick(id)}>{cells[id]}</td>;
 };
 
 export default Cell;
