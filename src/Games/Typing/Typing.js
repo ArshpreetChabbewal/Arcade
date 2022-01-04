@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react";
-import Asteroid from "./Asteroid";
+import React, { useState, useEffect, useRef } from "react";
+import Asteroids from "./Asteroids";
 import "./Typing.css";
 
 const Typing = () => {
@@ -37,8 +37,12 @@ const Typing = () => {
   ];
   const [asteroids, setAsteroids] = useState([]);
   const [userInput, setUserInput] = useState("");
-  const [speed, setSpeed] = useState(800);
+  const [speed, setSpeed] = useState(600);
   const [generationMultiplier, setGenerationMultiplier] = useState(10);
+
+  const asteroidsRef = useRef(null);
+
+  asteroidsRef.current = asteroids;
 
   useEffect(() => {
     setInterval(generateAsteroid, speed * generationMultiplier);
@@ -53,17 +57,19 @@ const Typing = () => {
     const word = cloud[6];
     const asteroid = { word, position: [horizontalPosition, 2] };
     setAsteroids([...asteroids, asteroid]);
+    console.log(`ASTEROIDS: ${asteroidsRef.current}`);
     // get a random horizontal position, with vertical position at the top
     // get a random word
     // append an asteroid to the list of asteroids
   };
 
   const dropAsteroids = () => {
-    let asteroidList = [...asteroids];
+    let asteroidList = [...asteroidsRef.current];
     asteroidList.forEach((asteroid) => {
-      asteroid.position = [asteroid.position[0], asteroid.position[1] + 1];
+      asteroid.position = [asteroid.position[0], asteroid.position[1] + 2];
     });
     setAsteroids(asteroidList);
+    console.log(`ASTEROIDS: ${asteroidsRef.current[0]?.position}`);
   };
 
   const processInput = (word) => {
@@ -79,17 +85,19 @@ const Typing = () => {
   const checkAsteroidDestroyed = (word) => {
     // loop through all asteroids and check if word matches any of them
     // if word equals any of the asteroids, remove the asteroid
+    console.log(word);
     let asteroidList = [...asteroids];
-    asteroidList.filter((asteroid) => asteroid.word !== word);
+    asteroidList.filter((asteroid) => asteroid.word.trim !== word.trim);
+    if (asteroidList.length !== asteroids.length) {
+      console.log("list changed");
+    }
     setAsteroids(asteroidList);
   };
 
   return (
     <div>
-      {asteroids.map((asteroid) => (
-        <Asteroid word={asteroid.word} position={asteroid.position} />
-      ))}
-      <div className="platform">{userInput}</div>
+      <Asteroids asteroids={asteroids} />
+      <div className="platform">abc</div>
       <input
         type="text"
         value={userInput}

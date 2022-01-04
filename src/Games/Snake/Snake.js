@@ -1,4 +1,5 @@
 import React from "react";
+import "./GameArea.css";
 
 const Snake = ({ snakeDots }) => {
   return (

@@ -3,11 +3,11 @@ import "./Typing.css";
 
 const Asteroid = ({ word, position }) => {
   const style = {
-    left: `${position[0]}%`,
-    top: `${position[1]}%`,
+    left: `${position[0]}px`,
+    top: `${position[1]}px`,
   };
   return (
-    <div classname="asteroid" style={style}>
+    <div className="asteroid" style={style}>
       {word}
     </div>
   );

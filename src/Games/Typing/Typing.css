@@ -1,9 +1,22 @@
 .asteroid {
+  position: absolute;
+  width: 2%;
+  height: 2%;
+  background-color: brown;
+  border: 1px solid #fff;
+  z-index: 2;
 }
 
 input {
-  position: ;
+  display: flex;
+  justify-content: center;
 }
 
 .platform {
+  display: flex;
+  justify-content: center;
+  background-color: blue;
+  width: 100%;
+  height: 10%;
+  margin-top: 600px;
 }
