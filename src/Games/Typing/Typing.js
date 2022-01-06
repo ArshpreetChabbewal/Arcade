@@ -38,17 +38,37 @@ const Typing = () => {
   const [asteroids, setAsteroids] = useState([]);
   const [score, setScore] = useState(0);
   const [userInput, setUserInput] = useState("");
-  const [speed, setSpeed] = useState(600);
+  const [speed, setSpeed] = useState(500);
+  const [level, setLevel] = useState(1);
   const [generationMultiplier, setGenerationMultiplier] = useState(10);
 
   const asteroidsRef = useRef(null);
+  const speedRef = useRef();
+  const levelRef = useRef();
+  const generationMultiplierRef = useRef();
 
   asteroidsRef.current = asteroids;
+  speedRef.current = speed;
+  levelRef.current = level;
+  generationMultiplierRef.current = generationMultiplier;
 
   useEffect(() => {
-    setInterval(generateAsteroid, speed * generationMultiplier);
-    setInterval(dropAsteroids, speed);
-  }, []);
+    setInterval(levelUp, 10000);
+    setInterval(
+      generateAsteroid,
+      speedRef.current * generationMultiplierRef.current
+    );
+    setInterval(dropAsteroids, speedRef.current);
+  }, [level]);
+
+  const levelUp = () => {
+    console.log("LEVELUP");
+    if (speedRef.current > 50) {
+      setSpeed(speedRef.current - 50);
+      setGenerationMultiplier(generationMultiplierRef.current - 1);
+      setLevel(levelRef.current + 1);
+    }
+  };
 
   const generateAsteroid = () => {
     const min = 1;
@@ -86,6 +106,10 @@ const Typing = () => {
   const restartGame = () => {
     setAsteroids([]);
     setScore(0);
+    setSpeed(500);
+    setLevel(1);
+    setGenerationMultiplier(10);
+    setUserInput("");
   };
 
   const processInput = (word) => {
@@ -124,6 +148,7 @@ const Typing = () => {
         onChange={(e) => processInput(e.target.value)}
       />
       <div>SCORE: {score}</div>
+      <div>LEVEL: {level}</div>
     </div>
   );
 };
