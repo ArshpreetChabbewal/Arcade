@@ -36,6 +36,7 @@ const Typing = () => {
     "haziness",
   ];
   const [asteroids, setAsteroids] = useState([]);
+  const [score, setScore] = useState(0);
   const [userInput, setUserInput] = useState("");
   const [speed, setSpeed] = useState(600);
   const [generationMultiplier, setGenerationMultiplier] = useState(10);
@@ -51,13 +52,12 @@ const Typing = () => {
 
   const generateAsteroid = () => {
     const min = 1;
-    const max = 98;
+    const max = 5;
     const horizontalPosition =
       Math.floor((Math.random() * (max - min + 1) + min) / 2) * 2;
-    const word = cloud[6];
+    const word = cloud[Math.floor(Math.random() * 25)];
     const asteroid = { word, position: [horizontalPosition, 2] };
-    setAsteroids([...asteroids, asteroid]);
-    console.log(`ASTEROIDS: ${asteroidsRef.current}`);
+    setAsteroids([...asteroidsRef.current, asteroid]);
     // get a random horizontal position, with vertical position at the top
     // get a random word
     // append an asteroid to the list of asteroids
@@ -69,7 +69,23 @@ const Typing = () => {
       asteroid.position = [asteroid.position[0], asteroid.position[1] + 2];
     });
     setAsteroids(asteroidList);
-    console.log(`ASTEROIDS: ${asteroidsRef.current[0]?.position}`);
+    checkForCollision();
+  };
+
+  const checkForCollision = () => {
+    let asteroidList = [...asteroidsRef.current];
+    asteroidList.forEach((asteroid) => {
+      if (asteroid.position[1] >= 70) {
+        alert("Game over");
+        restartGame();
+        return;
+      }
+    });
+  };
+
+  const restartGame = () => {
+    setAsteroids([]);
+    setScore(0);
   };
 
   const processInput = (word) => {
@@ -86,11 +102,15 @@ const Typing = () => {
     // loop through all asteroids and check if word matches any of them
     // if word equals any of the asteroids, remove the asteroid
     console.log(word);
-    let asteroidList = [...asteroids];
-    asteroidList.filter((asteroid) => asteroid.word.trim !== word.trim);
-    if (asteroidList.length !== asteroids.length) {
-      console.log("list changed");
-    }
+    let asteroidList = [...asteroidsRef.current];
+    asteroidList.forEach((asteroid) => {
+      if (asteroid.word.trim() === word.trim()) {
+        setScore(score + 100);
+      }
+    });
+    asteroidList = asteroidList.filter(
+      (asteroid) => asteroid.word.trim() !== word.trim()
+    );
     setAsteroids(asteroidList);
   };
 
@@ -103,6 +123,7 @@ const Typing = () => {
         value={userInput}
         onChange={(e) => processInput(e.target.value)}
       />
+      <div>SCORE: {score}</div>
     </div>
   );
 };

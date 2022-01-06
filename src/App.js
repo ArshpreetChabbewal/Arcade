@@ -7,8 +7,6 @@ import Typing from "./Games/Typing/Typing";
 const App = () => {
   return (
     <div>
-      {/* <TicTacToe /> */}
-      {/* <GameArea /> */}
       <Typing />
     </div>
   );
