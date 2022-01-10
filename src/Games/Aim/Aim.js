@@ -1,6 +1,4 @@
-import React, { useState, useEffect, useCallback, useRef } from "react";
-import Targets from "./Target";
-import Timer from "./Timer";
+import React, { useState, useEffect, useRef } from "react";
 import "./Aim.css";
 
 const Aim = () => {
@@ -11,12 +9,15 @@ const Aim = () => {
     [80, 80],
   ]);
   const [score, setScore] = useState(0);
+  const [seconds, setSeconds] = useState(60);
 
   const targetsRef = useRef(null);
   const scoreRef = useRef(null);
+  const secondsRef = useRef(null);
 
   targetsRef.current = targets;
   scoreRef.current = score;
+  secondsRef.current = seconds;
 
   const fillTargets = (targets) => {
     console.log("hello1");
@@ -38,6 +39,12 @@ const Aim = () => {
         setTargets(targets);
       }
     }
+  };
+
+  const gameOver = () => {
+    alert("The game is over");
+    setSeconds(60);
+    setScore(0);
   };
 
   const getRandomCoordinates = () => {
@@ -68,9 +75,22 @@ const Aim = () => {
     setScore(0);
   };
 
+  useEffect(() => {
+    setInterval(() => {
+      if (secondsRef.current > 0) {
+        setSeconds(secondsRef.current - 1);
+      } else {
+        gameOver();
+      }
+    }, 1000);
+  }, []);
+
   return (
     <>
-      <Timer />
+      <div>
+        <h1>Timer</h1>
+        <h1>{seconds}</h1>
+      </div>{" "}
       <div className="game-area">
         <div>
           {/* <Targets targets={targets} hitTarget={hitTarget} /> */}
