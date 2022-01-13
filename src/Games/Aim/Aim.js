@@ -41,12 +41,6 @@ const Aim = () => {
     }
   };
 
-  const gameOver = () => {
-    alert("The game is over");
-    setSeconds(60);
-    setScore(0);
-  };
-
   const getRandomCoordinates = () => {
     let min = 1;
     let max = 98;
@@ -72,6 +66,7 @@ const Aim = () => {
   const onGameOver = () => {
     alert(`Game Over. Score: ${score}`);
     setTargets(null);
+    setSeconds(60);
     setScore(0);
   };
 
@@ -80,7 +75,7 @@ const Aim = () => {
       if (secondsRef.current > 0) {
         setSeconds(secondsRef.current - 1);
       } else {
-        gameOver();
+        onGameOver();
       }
     }, 1000);
   }, []);
