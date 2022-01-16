@@ -69,7 +69,7 @@ const Home = () => {
         </Text>
         <Flex justifyContent="center" marginTop="-2em">
           <Input
-            placeHolder="Enter a game"
+            placeholder="Enter a game"
             size="sm"
             w="40%"
             h="2.2em"
@@ -85,39 +85,39 @@ const Home = () => {
         {/* Add random stuff */}
 
         <Flex marginTop="4em" alignItems="center" justifyContent="center">
-          <div class="slider">
-            <div class="slides">
+          <div className="slider">
+            <div className="slides">
               <input type="radio" name="radio-btn" id="radio1" />
               <input type="radio" name="radio-btn" id="radio2" />
               <input type="radio" name="radio-btn" id="radio3" />
               <input type="radio" name="radio-btn" id="radio4" />
 
-              <div class="slide first">
+              <div className="slide first">
                 <img src={GameImages[0]} alt="" />
               </div>
-              <div class="slide">
+              <div className="slide">
                 <img src={GameImages[1]} alt="" />
               </div>
-              <div class="slide">
+              <div className="slide">
                 <img src={GameImages[2]} alt="" />
               </div>
-              <div class="slide">
+              <div className="slide">
                 <img src={GameImages[3]} alt="" />
               </div>
 
-              <div class="navigation-auto">
-                <div class="auto-btn1"></div>
-                <div class="auto-btn2"></div>
-                <div class="auto-btn3"></div>
-                <div class="auto-btn4"></div>
+              <div className="navigation-auto">
+                <div className="auto-btn1"></div>
+                <div className="auto-btn2"></div>
+                <div className="auto-btn3"></div>
+                <div className="auto-btn4"></div>
               </div>
             </div>
 
-            <div class="navigation-manual">
-              <label for="radio1" class="manual-btn"></label>
-              <label for="radio2" class="manual-btn"></label>
-              <label for="radio3" class="manual-btn"></label>
-              <label for="radio4" class="manual-btn"></label>
+            <div className="navigation-manual">
+              <label htmlFor="radio1" className="manual-btn"></label>
+              <label htmlFor="radio2" className="manual-btn"></label>
+              <label htmlFor="radio3" className="manual-btn"></label>
+              <label htmlFor="radio4" className="manual-btn"></label>
             </div>
           </div>
         </Flex>

@@ -11,8 +11,10 @@ import {
 } from "@chakra-ui/react";
 import { ArrowBackIcon } from "@chakra-ui/icons";
 import GameImages from "../assets/gameImages.js";
+import { useNavigate } from "react-router-dom";
 
 const AimMenu = ({ setGameDescOpened }) => {
+  const navigate = useNavigate();
   return (
     <Box
       h="100vh"
@@ -83,6 +85,7 @@ const AimMenu = ({ setGameDescOpened }) => {
                 w="30%"
                 background="green"
                 _hover={{ backgroundColor: "white", color: "green" }}
+                onClick={() => navigate(`/aim`)}
               >
                 Play
               </Button>

@@ -11,8 +11,11 @@ import {
 } from "@chakra-ui/react";
 import { ArrowBackIcon } from "@chakra-ui/icons";
 import GameImages from "../assets/gameImages.js";
+import { Link as ReachLink } from "@reach/router";
+import { useNavigate } from "react-router-dom";
 
 const TicTacToeMenu = ({ setGameDescOpened }) => {
+  const navigate = useNavigate();
   return (
     <Box
       h="100vh"
@@ -83,6 +86,7 @@ const TicTacToeMenu = ({ setGameDescOpened }) => {
                 w="30%"
                 background="green"
                 _hover={{ backgroundColor: "white", color: "green" }}
+                onClick={() => navigate(`/tictactoe`)}
               >
                 Play
               </Button>

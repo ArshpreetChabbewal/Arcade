@@ -10,9 +10,12 @@ import {
   background,
 } from "@chakra-ui/react";
 import { ArrowBackIcon } from "@chakra-ui/icons";
+import { Link as ReachLink } from "@reach/router";
 import GameImages from "../assets/gameImages.js";
+import { useNavigate } from "react-router-dom";
 
 const TypingMenu = ({ setGameDescOpened }) => {
+  const navigate = useNavigate();
   return (
     <Box
       h="100vh"
@@ -83,6 +86,7 @@ const TypingMenu = ({ setGameDescOpened }) => {
                 w="30%"
                 background="green"
                 _hover={{ backgroundColor: "white", color: "green" }}
+                onClick={() => navigate(`/typing`)}
               >
                 Play
               </Button>

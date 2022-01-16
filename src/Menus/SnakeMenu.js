@@ -8,11 +8,15 @@ import {
   Button,
   Input,
   background,
+  Link,
 } from "@chakra-ui/react";
 import { ArrowBackIcon } from "@chakra-ui/icons";
 import GameImages from "../assets/gameImages.js";
+import { Link as ReachLink } from "@reach/router";
+import { useNavigate } from "react-router-dom";
 
 const SnakeMenu = ({ setGameDescOpened }) => {
+  const navigate = useNavigate();
   return (
     <Box
       position="absolute"
@@ -83,6 +87,7 @@ const SnakeMenu = ({ setGameDescOpened }) => {
                 w="30%"
                 background="green"
                 _hover={{ backgroundColor: "white", color: "green" }}
+                onClick={() => navigate(`/snake`)}
               >
                 Play
               </Button>
