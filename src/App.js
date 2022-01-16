@@ -5,6 +5,7 @@ import GameArea from "./Games/Snake/GameArea";
 import Typing from "./Games/Typing/Typing";
 import Aim from "./Games/Aim/Aim";
 import Home from "./Home";
+import SnakeMenu from "./Menus/SnakeMenu";
 
 const App = () => {
   return (
