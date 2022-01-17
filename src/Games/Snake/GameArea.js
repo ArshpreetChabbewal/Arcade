@@ -13,14 +13,19 @@ const GameArea = () => {
   const [direction, setDirection] = useState("RIGHT");
   const [food, setFood] = useState(null);
   const [speed, setSpeed] = useState(200);
+  const [gameOver, setGameOver] = useState(false);
 
   const snakeDotsRef = useRef(null);
   const directionRef = useRef(null);
   const foodRef = useRef(null);
+  const speedRef = useRef(null);
+  const gameOverRef = useRef(null);
 
   snakeDotsRef.current = snakeDots;
   directionRef.current = direction;
   foodRef.current = food;
+  speedRef.current = speed;
+  gameOverRef.current = gameOverRef;
 
   const getRandomCoordinates = () => {
     let min = 1;
@@ -38,7 +43,6 @@ const GameArea = () => {
   const moveSnake = () => {
     let dots = [...snakeDotsRef.current];
     let head = dots[dots.length - 1];
-
     switch (directionRef.current) {
       case "RIGHT":
         head = [head[0] + 2, head[1]];
@@ -53,7 +57,6 @@ const GameArea = () => {
         head = [head[0], head[1] + 2];
         break;
     }
-
     dots.push(head);
     dots.shift();
     setSnakeDots(dots);
@@ -80,7 +83,7 @@ const GameArea = () => {
   const checkIfOutOfBorders = () => {
     let head = snakeDots[snakeDots.length - 1];
     if (head[0] >= 100 || head[1] >= 100 || head[0] < 0 || head[1] < 0) {
-      onGameOver();
+      onGameOver(true);
     }
     return false;
   };
@@ -91,7 +94,7 @@ const GameArea = () => {
     snake.pop();
     snake.forEach((dot) => {
       if (head[0] === dot[0] && head[1] === dot[1]) {
-        onGameOver();
+        onGameOver(true);
       }
     });
   };
@@ -114,12 +117,13 @@ const GameArea = () => {
   };
 
   const increaseSpeed = () => {
-    if (speed > 10) {
-      setSpeed(speed - 10);
+    if (speedRef.current > 10) {
+      setSpeed(speedRef.current - 10);
     }
   };
 
   const onGameOver = () => {
+    setGameOver(true);
     alert(`Game Over. Snake length is ${snakeDots.length}`);
     setDirection("RIGHT");
     setSnakeDots([
@@ -128,11 +132,12 @@ const GameArea = () => {
       [4, 0],
     ]);
     setFood(null);
-    setSpeed(200);
+    setSpeed(210);
+    increaseSpeed();
   };
 
   useEffect(() => {
-    setInterval(moveSnake, speed);
+    setInterval(moveSnake, speedRef.current);
     document.addEventListener("keydown", escFunction, false);
 
     return () => {
@@ -147,9 +152,11 @@ const GameArea = () => {
   }, [snakeDots]);
 
   return (
-    <div className="game-area">
-      <Snake snakeDots={snakeDots} />
-      <Food dot={food} />
+    <div className="background">
+      <div className="new-game-area">
+        <Snake snakeDots={snakeDots} />
+        <Food dot={food} />
+      </div>
     </div>
   );
 };

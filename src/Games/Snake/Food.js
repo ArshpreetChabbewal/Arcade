@@ -8,7 +8,7 @@ const Food = ({ dot }) => {
   };
   console.log(`FOOD: ${dot}`);
   return (
-    <div className="snake-food" style={style}>
+    <div className="new-snake-food" style={style}>
       <div></div>
     </div>
   );

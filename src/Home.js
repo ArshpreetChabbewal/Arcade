@@ -20,12 +20,18 @@ import "./Home.css";
 
 const Home = () => {
   const [counter, setCounter] = useState(1);
-  const [gameDescOpened, setGameDescOpened] = useState("none");
+  const [gameMenuOpened, setGameMenuOpened] = useState("none");
   const counterRef = useRef();
 
   counterRef.current = counter;
 
-  const openGameDesc = () => {};
+  const openGameMenu = (game) => {
+    setGameMenuOpened(game);
+    if (game !== "none") {
+      document.body.scrollTop = 0;
+      document.documentElement.scrollTop = 0;
+    }
+  };
 
   const changeImage = () => {
     document.getElementById("radio" + counterRef.current).checked = true;
@@ -40,18 +46,14 @@ const Home = () => {
   }, []);
 
   return (
-    <>
-      {gameDescOpened === "snake" && (
-        <SnakeMenu setGameDescOpened={setGameDescOpened} />
+    <div className={`${gameMenuOpened !== "none" && "preventScroll"}`}>
+      {gameMenuOpened === "snake" && <SnakeMenu openGameMenu={openGameMenu} />}
+      {gameMenuOpened === "aim" && <AimMenu openGameMenu={openGameMenu} />}
+      {gameMenuOpened === "tictactoe" && (
+        <TicTacToeMenu openGameMenu={openGameMenu} />
       )}
-      {gameDescOpened === "aim" && (
-        <AimMenu setGameDescOpened={setGameDescOpened} />
-      )}
-      {gameDescOpened === "tictactoe" && (
-        <TicTacToeMenu setGameDescOpened={setGameDescOpened} />
-      )}
-      {gameDescOpened === "typing" && (
-        <TypingMenu setGameDescOpened={setGameDescOpened} />
+      {gameMenuOpened === "typing" && (
+        <TypingMenu openGameMenu={openGameMenu} />
       )}
       <Box
         bgGradient="linear(to-br, #010101, #171717)"
@@ -64,8 +66,9 @@ const Home = () => {
           fontSize="2.5em"
           paddingLeft="1em"
           paddingTop="0.5em"
+          fontFamily="Poppins"
         >
-          Title
+          Arcade
         </Text>
         <Flex justifyContent="center" marginTop="-2em">
           <Input
@@ -126,13 +129,14 @@ const Home = () => {
           fontSize="4em"
           color="#ffffff"
           fontWeight="bold"
-          fontFamily="Calibri"
+          fontFamily=""
         >
           Games
         </Text>
         <Grid
           marginTop="2em"
           marginLeft="10%"
+          marginBottom="10em"
           w="80%"
           templateColumns="repeat(4, 1fr)"
           gap={20}
@@ -142,7 +146,7 @@ const Home = () => {
               src={GameImages[0]}
               transition="0.3s"
               _hover={{ transform: "scale(1.1)" }}
-              onClick={() => setGameDescOpened("snake")}
+              onClick={() => openGameMenu("snake")}
             />
           </Box>
           <Box>
@@ -150,7 +154,7 @@ const Home = () => {
               src={GameImages[1]}
               transition="0.3s"
               _hover={{ transform: "scale(1.1)" }}
-              onClick={() => setGameDescOpened("aim")}
+              onClick={() => openGameMenu("aim")}
             />
           </Box>
           <Box>
@@ -158,7 +162,7 @@ const Home = () => {
               src={GameImages[2]}
               transition="0.3s"
               _hover={{ transform: "scale(1.1)" }}
-              onClick={() => setGameDescOpened("typing")}
+              onClick={() => openGameMenu("typing")}
             />
           </Box>
           <Box>
@@ -166,12 +170,12 @@ const Home = () => {
               src={GameImages[3]}
               transition="0.3s"
               _hover={{ transform: "scale(1.1)" }}
-              onClick={() => setGameDescOpened("tictactoe")}
+              onClick={() => openGameMenu("tictactoe")}
             />
           </Box>
         </Grid>
       </Box>
-    </>
+    </div>
   );
 };
 

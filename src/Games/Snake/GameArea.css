@@ -1,25 +1,53 @@
+.background {
+  position: absolute;
+  z-index: 1;
+  background: linear-gradient(rgb(34, 34, 34), rgb(92, 92, 92));
+  height: 100vh;
+  width: 100vw;
+}
+
 .game-area {
   position: relative;
   margin: 50px auto;
-  width: 600px;
-  height: 600px;
-  border: 2px solid #000;
+  width: 90vh;
+  height: 90vh;
+  border: 5px solid red;
+  background: black;
+}
+
+.new-game-area {
+  position: relative;
+  margin: 5vh auto;
+  width: 90vh;
+  height: 90vh;
+  border: 5px solid red;
+  background: black;
+  z-index: 2;
 }
 
 .snake-dot {
   position: absolute;
   width: 2%;
   height: 2%;
-  background-color: #000;
-  border: 1px solid #fff;
-  z-index: 2;
+  background-color: white;
+  border: 1px solid black;
+  z-index: 3;
 }
 
 .snake-food {
   position: absolute;
   width: 2%;
   height: 2%;
-  background-color: red;
+  background: blue;
   border: 1px solid #fff;
+  z-index: 3;
+}
+
+.new-snake-food {
+  position: absolute;
+  width: 2%;
+  height: 2%;
+  background: rgb(113, 240, 113);
+  border: 1px solid rgb(0, 0, 0);
   z-index: 1;
 }

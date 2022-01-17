@@ -13,7 +13,7 @@ import { ArrowBackIcon } from "@chakra-ui/icons";
 import GameImages from "../assets/gameImages.js";
 import { useNavigate } from "react-router-dom";
 
-const AimMenu = ({ setGameDescOpened }) => {
+const AimMenu = ({ openGameMenu }) => {
   const navigate = useNavigate();
   return (
     <Box
@@ -50,7 +50,7 @@ const AimMenu = ({ setGameDescOpened }) => {
             bg="rgba(0,0,0,0)"
             color="white"
             _hover={{ color: "black", background: "white" }}
-            onClick={() => setGameDescOpened("none")}
+            onClick={() => openGameMenu("none")}
           >
             <ArrowBackIcon />
             Back

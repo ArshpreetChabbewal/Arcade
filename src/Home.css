@@ -98,3 +98,9 @@
 #radio4:checked ~ .navigation-auto .auto-btn4 {
   background: #40d3dc;
 }
+
+.preventScroll {
+  position: fixed;
+  height: 100%;
+  width: 100%;
+}

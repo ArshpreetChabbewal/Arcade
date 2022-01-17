@@ -15,7 +15,7 @@ import GameImages from "../assets/gameImages.js";
 import { Link as ReachLink } from "@reach/router";
 import { useNavigate } from "react-router-dom";
 
-const SnakeMenu = ({ setGameDescOpened }) => {
+const SnakeMenu = ({ openGameMenu }) => {
   const navigate = useNavigate();
   return (
     <Box
@@ -52,7 +52,7 @@ const SnakeMenu = ({ setGameDescOpened }) => {
             bg="rgba(0,0,0,0)"
             color="white"
             _hover={{ color: "black", background: "white" }}
-            onClick={() => setGameDescOpened("none")}
+            onClick={() => openGameMenu("none")}
           >
             <ArrowBackIcon />
             Back

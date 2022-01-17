@@ -14,7 +14,7 @@ import GameImages from "../assets/gameImages.js";
 import { Link as ReachLink } from "@reach/router";
 import { useNavigate } from "react-router-dom";
 
-const TicTacToeMenu = ({ setGameDescOpened }) => {
+const TicTacToeMenu = ({ openGameMenu }) => {
   const navigate = useNavigate();
   return (
     <Box
@@ -51,7 +51,7 @@ const TicTacToeMenu = ({ setGameDescOpened }) => {
             bg="rgba(0,0,0,0)"
             color="white"
             _hover={{ color: "black", background: "white" }}
-            onClick={() => setGameDescOpened("none")}
+            onClick={() => openGameMenu("none")}
           >
             <ArrowBackIcon />
             Back
