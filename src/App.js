@@ -8,7 +8,7 @@ import Home from "./Home";
 
 const App = () => {
   return (
-    <GameArea />
+    <Aim />
     // <Router>
     //   <Routes>
     //     <Route exact path="/aim" element={<Aim />} />

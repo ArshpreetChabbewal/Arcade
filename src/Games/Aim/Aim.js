@@ -42,8 +42,8 @@ const Aim = () => {
   };
 
   const getRandomCoordinates = () => {
-    let min = 1;
-    let max = 98;
+    let min = 10;
+    let max = 88;
     let x = Math.floor((Math.random() * (max - min + 1) + min) / 2) * 2;
     let y = Math.floor((Math.random() * (max - min + 1) + min) / 2) * 2;
     return [x, y];
@@ -64,8 +64,14 @@ const Aim = () => {
   };
 
   const onGameOver = () => {
-    alert(`Game Over. Score: ${score}`);
-    setTargets(null);
+    console.log(seconds);
+    alert(`Game Over. Score: ${scoreRef.current}`);
+    setTargets([
+      [20, 20],
+      [20, 80],
+      [80, 20],
+      [80, 80],
+    ]);
     setSeconds(60);
     setScore(0);
   };
@@ -82,13 +88,72 @@ const Aim = () => {
 
   return (
     <>
-      <div>
-        <h1>Timer</h1>
-        <h1>{seconds}</h1>
-      </div>{" "}
-      <div className="game-area">
+      <div className="background">
+        <div className="info">
+          <div className="timer">
+            <h1>Timer</h1>
+            <h1>{seconds}</h1>
+          </div>
+          <div className="score">
+            <h1>Score: {score}</h1>
+          </div>
+        </div>
+
+        <div className="game-area">
+          <div>
+            <button
+              className="targets"
+              style={{
+                left: `${targets[0][0]}%`,
+                top: `${targets[0][1]}%`,
+              }}
+              onClick={() => {
+                hitTarget(0);
+              }}
+            ></button>
+            <button
+              className="targets"
+              style={{
+                left: `${targets[1][0]}%`,
+                top: `${targets[1][1]}%`,
+              }}
+              onClick={() => {
+                hitTarget(1);
+              }}
+            ></button>
+            <button
+              className="targets"
+              style={{
+                left: `${targets[2][0]}%`,
+                top: `${targets[2][1]}%`,
+              }}
+              onClick={() => {
+                hitTarget(2);
+              }}
+            ></button>
+            <button
+              className="targets"
+              style={{
+                left: `${targets[3][0]}%`,
+                top: `${targets[3][1]}%`,
+              }}
+              onClick={() => {
+                hitTarget(3);
+              }}
+            ></button>
+          </div>
+        </div>
+      </div>
+    </>
+  );
+};
+
+export default Aim;
+
+{
+  /*       <div className="game-area">
         <div>
-          {/* <Targets targets={targets} hitTarget={hitTarget} /> */}
+          {/* <Targets targets={targets} hitTarget={hitTarget} /> }
           <button
             className="snake-dot"
             style={{
@@ -130,10 +195,5 @@ const Aim = () => {
             }}
           ></button>
         </div>
-      </div>
-      <div>Score: {score}</div>
-    </>
-  );
-};
-
-export default Aim;
+      </div> */
+}
