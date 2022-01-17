@@ -1,10 +1,47 @@
+.background {
+  position: absolute;
+  z-index: 1;
+  background: linear-gradient(rgb(34, 34, 34), rgb(92, 92, 92));
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.turn {
+  font-size: 3em;
+  color: white;
+  font-weight: bold;
+}
+
+table {
+  margin-top: 3em;
+  table-layout: fixed;
+  width: 75vh;
+  height: 75vh;
+}
+
 table td {
-  border: 1px solid grey;
-  width: 100px;
-  height: 100px;
+  border: 5px solid gray;
+  width: 25vh;
+  height: 10vh;
+  margin-top: 2em;
+  color: white;
+  background: black;
+  font-size: 4em;
+  font-weight: bold;
+  overflow: hidden;
+}
+
+h1 {
+  padding-left: 40%;
 }
 
 .container {
   display: flex;
   justify-content: center;
+  width: 80vw;
+  height: 80vh;
 }

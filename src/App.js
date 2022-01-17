@@ -8,7 +8,7 @@ import Home from "./Home";
 
 const App = () => {
   return (
-    <Aim />
+    <Typing />
     // <Router>
     //   <Routes>
     //     <Route exact path="/aim" element={<Aim />} />

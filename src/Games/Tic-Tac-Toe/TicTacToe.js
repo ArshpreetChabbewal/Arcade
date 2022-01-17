@@ -1,11 +1,14 @@
-import React, { useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import Cell from "./Cell";
 import "./TicTacToe.css";
 
 const TicTacToe = () => {
   const [turn, setTurn] = useState("X");
   const [cells, setCells] = useState(Array(9).fill(""));
-  const [winner, setWinner] = useState();
+  const [winner, setWinner] = useState(null);
+
+  const winnerRef = useRef();
+  winnerRef.current = winner;
 
   const checkForWinner = (cells) => {
     const combos = {
@@ -33,6 +36,8 @@ const TicTacToe = () => {
           cells[pattern[1]] === cells[pattern[2]]
         ) {
           setWinner(cells[pattern[0]]);
+          console.log(cells[pattern[0]]);
+          console.log(winnerRef.current);
         }
       });
     }
@@ -53,34 +58,39 @@ const TicTacToe = () => {
     setCells(Array(9).fill(""));
   };
 
+  useEffect(() => {
+    if (winner !== null) {
+      alert(
+        `${winnerRef.current} is the winner! Would you like to play again?`
+      );
+      handleRestart();
+    }
+  }, [winner]);
+
   return (
-    <div className="container">
-      <table>
-        Turn: {turn}
-        <tbody>
-          <tr>
-            <Cell id={0} handleClick={handleClick} cells={cells} />
-            <Cell id={1} handleClick={handleClick} cells={cells} />
-            <Cell id={2} handleClick={handleClick} cells={cells} />
-          </tr>
-          <tr>
-            <Cell id={3} handleClick={handleClick} cells={cells} />
-            <Cell id={4} handleClick={handleClick} cells={cells} />
-            <Cell id={5} handleClick={handleClick} cells={cells} />
-          </tr>
-          <tr>
-            <Cell id={6} handleClick={handleClick} cells={cells} />
-            <Cell id={7} handleClick={handleClick} cells={cells} />
-            <Cell id={8} handleClick={handleClick} cells={cells} />
-          </tr>
-        </tbody>
-      </table>
-      {winner && (
-        <>
-          <p>{winner} is the winner!</p>
-          <button onClick={() => handleRestart()}>Play Again</button>
-        </>
-      )}
+    <div className="background">
+      <div className="turn">Player {turn}'s Turn</div>
+      <div className="container">
+        <table>
+          <tbody>
+            <tr>
+              <Cell id={0} handleClick={handleClick} cells={cells} />
+              <Cell id={1} handleClick={handleClick} cells={cells} />
+              <Cell id={2} handleClick={handleClick} cells={cells} />
+            </tr>
+            <tr>
+              <Cell id={3} handleClick={handleClick} cells={cells} />
+              <Cell id={4} handleClick={handleClick} cells={cells} />
+              <Cell id={5} handleClick={handleClick} cells={cells} />
+            </tr>
+            <tr>
+              <Cell id={6} handleClick={handleClick} cells={cells} />
+              <Cell id={7} handleClick={handleClick} cells={cells} />
+              <Cell id={8} handleClick={handleClick} cells={cells} />
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 };
