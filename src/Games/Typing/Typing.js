@@ -4,43 +4,114 @@ import "./Typing.css";
 
 const Typing = () => {
   const cloud = [
-    "meningococcus",
-    "asininely",
-    "shavers",
-    "cockpit",
-    "misbinds",
-    "corse",
-    "bee",
-    "stibnite",
-    "dorsoventrality",
-    "quatres",
-    "truckloads",
-    "affidavits",
-    "macrophotograph",
-    "coevolutions",
-    "footsy",
-    "angering",
-    "quassins",
-    "stratospheres",
-    "squirm",
-    "artel",
-    "restations",
-    "upsoars",
-    "lacunose",
-    "reinsert",
-    "fibroblastic",
-    "matchmark",
-    "underfeeds",
-    "trumeaux",
-    "whimsicalities",
-    "haziness",
+    "stupendous",
+    "trace",
+    "geese",
+    "pumped",
+    "exciting",
+    "whip",
+    "fascinated",
+    "flock",
+    "many",
+    "nose",
+    "trousers",
+    "whistle",
+    "steep",
+    "blue",
+    "hammer",
+    "disarm",
+    "ocean",
+    "bead",
+    "strip",
+    "material",
+    "giraffe",
+    "fabulous",
+    "man",
+    "abrupt",
+    "fat",
+    "produce",
+    "smooth",
+    "extra-small",
+    "known",
+    "wool",
+    "boring",
+    "wren",
+    "victorious",
+    "elastic",
+    "vegetable",
+    "comfortable",
+    "fall",
+    "dress",
+    "mailbox",
+    "lazy",
+    "cat",
+    "public",
+    "cub",
+    "pack",
+    "question",
+    "flawless",
+    "collar",
+    "books",
+    "envious",
+    "windy",
+    "punish",
+    "tasteful",
+    "force",
+    "tree",
+    "noiseless",
+    "exchange",
+    "sophisticated",
+    "sister",
+    "high-pitched",
+    "boorish",
+    "legs",
+    "proud",
+    "chickens",
+    "psychotic",
+    "distinct",
+    "soft",
+    "tub",
+    "old",
+    "minute",
+    "bumpy",
+    "welcome",
+    "erratic",
+    "nutty",
+    "well-groomed",
+    "charming",
+    "toad",
+    "decisive",
+    "salt",
+    "horn",
+    "damaged",
+    "fertile",
+    "cart",
+    "lick",
+    "unadvised",
+    "royal",
+    "careful",
+    "voice",
+    "follow",
+    "north",
+    "greasy",
+    "waste",
+    "repair",
+    "bear",
+    "work",
+    "lackadaisical",
+    "fang",
+    "laugh",
+    "harm",
+    "tame",
+    "thing",
   ];
   const [asteroids, setAsteroids] = useState([]);
   const [score, setScore] = useState(0);
   const [userInput, setUserInput] = useState("");
-  const [speed, setSpeed] = useState(500);
+  const [speed, setSpeed] = useState(700);
   const [level, setLevel] = useState(1);
-  const [generationMultiplier, setGenerationMultiplier] = useState(10);
+  const [generationMultiplier, setGenerationMultiplier] = useState(6);
+  const [resetGame, setResetGame] = useState(false);
 
   const asteroidsRef = useRef(null);
   const speedRef = useRef();
@@ -53,29 +124,44 @@ const Typing = () => {
   generationMultiplierRef.current = generationMultiplier;
 
   useEffect(() => {
-    setInterval(levelUp, 10000);
-    setInterval(
+    const levelInterval = setInterval(levelUp, 20000);
+    const generateAsteroidInterval = setInterval(
       generateAsteroid,
       speedRef.current * generationMultiplierRef.current
     );
-    setInterval(dropAsteroids, speedRef.current);
-  }, [level]);
+    const dropAsteroidsInterval = setInterval(dropAsteroids, speedRef.current);
+
+    if (resetGame) {
+      clearInterval(levelInterval);
+      clearInterval(generateAsteroidInterval);
+      clearInterval(dropAsteroidsInterval);
+      setResetGame(false);
+    }
+
+    return function cleanup() {
+      clearInterval(levelInterval);
+      clearInterval(generateAsteroidInterval);
+      clearInterval(dropAsteroidsInterval);
+    };
+  }, [speedRef.current, generationMultiplier.current]);
 
   const levelUp = () => {
     console.log("LEVELUP");
-    if (speedRef.current > 50) {
+    if (speedRef.current > 200) {
       setSpeed(speedRef.current - 50);
-      setGenerationMultiplier(generationMultiplierRef.current - 1);
+      setGenerationMultiplier(generationMultiplierRef.current - 0.25);
       setLevel(levelRef.current + 1);
+      console.log(`${speedRef.current}`);
+      console.log(`${generationMultiplierRef.current}`);
     }
   };
 
   const generateAsteroid = () => {
-    const min = 1;
-    const max = 5;
+    const min = 20;
+    const max = 80;
     const horizontalPosition =
       Math.floor((Math.random() * (max - min + 1) + min) / 2) * 2;
-    const word = cloud[Math.floor(Math.random() * 25)];
+    const word = cloud[Math.floor(Math.random() * 99)];
     const asteroid = { word, position: [horizontalPosition, 2] };
     setAsteroids([...asteroidsRef.current, asteroid]);
     // get a random horizontal position, with vertical position at the top
@@ -95,8 +181,8 @@ const Typing = () => {
   const checkForCollision = () => {
     let asteroidList = [...asteroidsRef.current];
     asteroidList.forEach((asteroid) => {
-      if (asteroid.position[1] >= 70) {
-        alert("Game over");
+      if (asteroid.position[1] >= 78) {
+        // alert("Game over, your score is `${scoreRef.current}`");
         restartGame();
         return;
       }
@@ -106,10 +192,11 @@ const Typing = () => {
   const restartGame = () => {
     setAsteroids([]);
     setScore(0);
-    setSpeed(500);
+    setSpeed(700);
     setLevel(1);
-    setGenerationMultiplier(10);
+    setGenerationMultiplier(15);
     setUserInput("");
+    setResetGame(true);
   };
 
   const processInput = (word) => {
@@ -139,16 +226,20 @@ const Typing = () => {
   };
 
   return (
-    <div>
+    <div className="background">
       <Asteroids asteroids={asteroids} />
-      <div className="platform">abc</div>
-      <input
-        type="text"
-        value={userInput}
-        onChange={(e) => processInput(e.target.value)}
-      />
-      <div>SCORE: {score}</div>
-      <div>LEVEL: {level}</div>
+      <div className="platform_boundary">_______</div>
+      <div className="platform">
+        <input
+          type="text"
+          value={userInput}
+          onChange={(e) => processInput(e.target.value)}
+        />
+        <div className="info">
+          <div>SCORE: {score}</div>
+          <div>LEVEL: {level}</div>
+        </div>
+      </div>
     </div>
   );
 };
