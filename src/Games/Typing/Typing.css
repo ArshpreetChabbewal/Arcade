@@ -52,3 +52,14 @@ input {
   margin-top: 5vh;
   font-weight: bold;
 }
+
+.new_info {
+  margin-top: 6.5vh;
+  margin-left: 1vw;
+  font-weight: bold;
+}
+
+h2 {
+  color: white;
+  font-weight: bold;
+}

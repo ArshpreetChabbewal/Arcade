@@ -10,13 +10,14 @@ import {
   Fade,
   useDisclosure,
 } from "@chakra-ui/react";
-import Background from "./assets/arcade.jpg";
+import Logo from "./assets/arcadelogo.jpg";
 import GameImages from "./assets/gameImages.js";
 import SnakeMenu from "./Menus/SnakeMenu";
 import AimMenu from "./Menus/AimMenu";
 import TicTacToeMenu from "./Menus/TicTacToeMenu";
 import TypingMenu from "./Menus/TypingMenu";
 import "./Home.css";
+import { SearchIcon } from "@chakra-ui/icons";
 
 const Home = () => {
   const [counter, setCounter] = useState(1);
@@ -61,7 +62,8 @@ const Home = () => {
         top="0"
         left="0"
       >
-        <Text
+        <Image paddingLeft="1em" paddingTop="1em" src={Logo} />
+        {/* <Text
           color="#ffffff"
           fontSize="2.5em"
           paddingLeft="1em"
@@ -69,21 +71,31 @@ const Home = () => {
           fontFamily="Poppins"
         >
           Arcade
-        </Text>
-        <Flex justifyContent="center" marginTop="-2em">
+        </Text> */}
+        <Flex justifyContent="center" marginTop="-5em">
           <Input
             placeholder="Enter a game"
             size="sm"
             w="40%"
             h="2.2em"
-            borderRadius="5"
+            borderRadius="5px 0px 0px 5px"
             color="#ffffff"
             fontFamily="calibri"
             fontSize="1.2em"
             backgroundColor="#171717"
             borderColor="#272727"
           />
-          <Button borderRadius="0" marginLeft="-2em" h="2.6em" w="5em"></Button>
+          <Button
+            borderRadius="0"
+            marginLeft="0em"
+            h="2.6em"
+            w="5em"
+            backgroundColor="red.400"
+            borderRadius="0px 5px 5px 0px"
+            color="#000"
+          >
+            <SearchIcon />
+          </Button>
         </Flex>
         {/* Add random stuff */}
 
@@ -96,16 +108,16 @@ const Home = () => {
               <input type="radio" name="radio-btn" id="radio4" />
 
               <div className="slide first">
-                <img src={GameImages[0]} alt="" />
+                <img src={GameImages[1][0]} alt="" />
               </div>
               <div className="slide">
-                <img src={GameImages[1]} alt="" />
+                <img src={GameImages[1][1]} alt="" />
               </div>
               <div className="slide">
-                <img src={GameImages[2]} alt="" />
+                <img src={GameImages[1][2]} alt="" />
               </div>
               <div className="slide">
-                <img src={GameImages[3]} alt="" />
+                <img src={GameImages[1][3]} alt="" />
               </div>
 
               <div className="navigation-auto">
@@ -143,33 +155,49 @@ const Home = () => {
         >
           <Box>
             <Image
-              src={GameImages[0]}
+              src={GameImages[0][0]}
               transition="0.3s"
-              _hover={{ transform: "scale(1.1)" }}
+              objectFit="cover"
+              _hover={{
+                transform: "scale(1.1)",
+                boxShadow: "0px 0px 20px #FFF",
+              }}
               onClick={() => openGameMenu("snake")}
             />
           </Box>
           <Box>
             <Image
-              src={GameImages[1]}
+              src={GameImages[0][1]}
               transition="0.3s"
-              _hover={{ transform: "scale(1.1)" }}
+              objectFit="cover"
+              _hover={{
+                transform: "scale(1.1)",
+                boxShadow: "0px 0px 20px #FFF",
+              }}
               onClick={() => openGameMenu("aim")}
             />
           </Box>
           <Box>
             <Image
-              src={GameImages[2]}
+              src={GameImages[0][2]}
               transition="0.3s"
-              _hover={{ transform: "scale(1.1)" }}
+              objectFit="cover"
+              _hover={{
+                transform: "scale(1.1)",
+                boxShadow: "0px 0px 20px #FFF",
+              }}
               onClick={() => openGameMenu("typing")}
             />
           </Box>
           <Box>
             <Image
-              src={GameImages[3]}
+              src={GameImages[0][3]}
               transition="0.3s"
-              _hover={{ transform: "scale(1.1)" }}
+              objectFit="cover"
+              _hover={{
+                transform: "scale(1.1)",
+                boxShadow: "0px 0px 20px #FFF",
+              }}
               onClick={() => openGameMenu("tictactoe")}
             />
           </Box>

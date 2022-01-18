@@ -1,15 +1,7 @@
-.background {
-  position: absolute;
-  z-index: 1;
-  background: linear-gradient(rgb(34, 34, 34), rgb(92, 92, 92));
-  height: 100vh;
-  width: 100vw;
-}
-
 .game-area {
   position: absolute;
   margin-top: 5vh;
-  margin-left: 27vw;
+  margin-left: 10vw;
   width: 90vh;
   height: 90vh;
   border: 5px solid red;
@@ -40,6 +32,9 @@
 .info {
   padding-left: 3em;
   padding-top: 1em;
+  margin-top: -43em;
+  margin-left: -100em;
+  width: 50%;
   display: flex;
   flex-direction: column;
   color: white;
@@ -55,6 +50,7 @@ h1 {
   color: white;
   font-weight: bold;
   font-size: 2em;
+  margin-top: 10em;
 }
 
 .score {

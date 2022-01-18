@@ -29,9 +29,9 @@ const TypingMenu = ({ openGameMenu }) => {
       <div>_</div>
       <Box marginTop="15vh">
         <Image
-          src={GameImages[2]}
+          src={GameImages[2][2]}
           h="70vh"
-          w="70vw"
+          w="35vw"
           marginBottom="-85vh"
           marginLeft="15vw"
         />

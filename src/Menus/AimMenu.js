@@ -28,11 +28,12 @@ const AimMenu = ({ openGameMenu }) => {
       <div>_</div>
       <Box marginTop="15vh">
         <Image
-          src={GameImages[1]}
+          src={GameImages[2][1]}
           h="70vh"
-          w="70vw"
+          w="35vw"
           marginBottom="-85vh"
           marginLeft="15vw"
+          objectFit="cover"
         />
       </Box>
       <Flex alignItems="center" justifyContent="center">

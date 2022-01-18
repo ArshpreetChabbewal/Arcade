@@ -8,16 +8,15 @@ import Home from "./Home";
 
 const App = () => {
   return (
-    <Typing />
-    // <Router>
-    //   <Routes>
-    //     <Route exact path="/aim" element={<Aim />} />
-    //     <Route exact path="/typing" element={<Typing />} />
-    //     <Route exact path="/snake" element={<GameArea />} />
-    //     <Route exact path="/tictactoe" element={<TicTacToe />} />
-    //     <Route exact path="/" element={<Home />} />
-    //   </Routes>
-    // </Router>
+    <Router>
+      <Routes>
+        <Route exact path="/aim" element={<Aim />} />
+        <Route exact path="/typing" element={<Typing />} />
+        <Route exact path="/snake" element={<GameArea />} />
+        <Route exact path="/tictactoe" element={<TicTacToe />} />
+        <Route exact path="/" element={<Home />} />
+      </Routes>
+    </Router>
   );
 };
 

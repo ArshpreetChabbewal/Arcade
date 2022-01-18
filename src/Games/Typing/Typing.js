@@ -235,9 +235,9 @@ const Typing = () => {
           value={userInput}
           onChange={(e) => processInput(e.target.value)}
         />
-        <div className="info">
-          <div>SCORE: {score}</div>
-          <div>LEVEL: {level}</div>
+        <div className="new_info">
+          <h2>SCORE: {score}</h2>
+          <h2>LEVEL: {level}</h2>
         </div>
       </div>
     </div>
